@@ -1,0 +1,181 @@
+/*
+This file will allow easy customization of various components, including web crawling, machine learning, node management, and more.
+
+Explanation of Configuration File Sections:
+
+1. General Configuration:
+
+logging_level: Set the verbosity of logs (e.g., INFO, DEBUG).
+
+system_name: A name for the IAI system for easy identification.
+
+
+
+2. Distributed Training:
+
+enabled: Whether distributed training is enabled.
+
+nodes_required: How many nodes are needed for training.
+
+training_algorithm: Defines the algorithm to use (e.g., deep learning).
+
+max_epochs: The maximum number of epochs for training.
+
+batch_size and learning_rate: Standard hyperparameters for training.
+
+
+
+3. Node Management and Load Balancing:
+
+auto_discovery: Whether nodes should be automatically discovered in the network.
+
+max_nodes: Maximum number of nodes to be used by IAI.
+
+node_roles: Number of nodes assigned to different roles (e.g., master, worker).
+
+node_timeout: Timeout for waiting for node responses.
+
+
+
+4. Web Crawling:
+
+enabled: Whether the web crawling feature is enabled.
+
+crawl_interval: Time between each crawl cycle.
+
+seed_urls: A list of URLs to start crawling from.
+
+crawl_types: What type of pages to crawl (e.g., articles, forums).
+
+max_pages_per_crawl: Limits the number of pages crawled in a single cycle.
+
+
+
+5. Machine Learning and Knowledge Base:
+
+load_pretrained_models: Whether to load existing models or start fresh.
+
+data_sources: External data sources for the knowledge base.
+
+update_frequency: How often the knowledge base is updated.
+
+caching_enabled: Whether to cache frequently used knowledge.
+
+
+
+6. API Server Configuration:
+
+enabled: Whether the API server is active.
+
+host and port: Defines the host and port the API will run on.
+
+cors_enabled: Whether to allow cross-origin requests (important for web clients).
+
+
+
+7. Message Queue:
+
+enabled: Whether the message queue system is active.
+
+queue_type: The type of queue system used (e.g., RabbitMQ, Kafka).
+
+host, port, username, password: Connection details for the message queue.
+
+
+
+8. Task Scheduling:
+
+enabled: Whether task scheduling is active.
+
+max_concurrent_tasks: Maximum number of tasks that can run concurrently.
+
+task_timeout: Timeout for each task.
+
+retry_interval: How long to wait before retrying failed tasks.
+
+
+
+9. Future Features:
+
+Placeholder for any new features you want to implement, such as federated learning, real-time updates, or anomaly detection.
+*/
+
+# General Configuration
+iai:
+  version: "1.0.0"
+  logging_level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  system_name: "IAI System"
+  
+# Distributed Training Configuration
+training:
+  enabled: true
+  nodes_required: 5  # Number of nodes required for distributed training
+  training_algorithm: "Deep Learning"  # Options: "Deep Learning", "Random Forest", etc.
+  max_epochs: 50
+  batch_size: 32
+  learning_rate: 0.001
+  
+# Node Management and Load Balancing
+node_management:
+  auto_discovery: true  # Enable automatic discovery of nodes
+  max_nodes: 10  # Maximum number of nodes that can be used
+  node_roles:
+    master: 1  # Number of master nodes
+    worker: 5  # Number of worker nodes
+    auxiliary: 2  # Auxiliary nodes for non-essential tasks
+  node_timeout: 30  # Timeout in seconds for nodes to respond
+  
+# Web Crawling Configuration
+web_crawling:
+  enabled: true
+  crawl_interval: 600  # Interval (in seconds) between each crawling cycle
+  max_depth: 3  # Maximum depth for web crawling
+  seed_urls:
+    - "https://www.example.com"
+    - "https://www.anotherexample.com"
+  crawl_types:
+    - "article"
+    - "forum"
+  max_pages_per_crawl: 50
+
+# Machine Learning / Knowledge Base
+knowledge_base:
+  load_pretrained_models: true  # Whether to load pretrained models or start from scratch
+  data_sources:
+    - "https://data.example.com"
+    - "https://data.anotherexample.com"
+  update_frequency: "daily"  # How often to update the knowledge base
+  caching_enabled: true  # Whether to enable caching of frequently used data
+
+# API Server Configuration
+api_server:
+  enabled: true
+  host: "0.0.0.0"  # API server listening address
+  port: 5000  # Port for API server
+  cors_enabled: true  # Whether to allow cross-origin requests
+  allowed_origins:
+    - "http://localhost:3000"
+    - "http://example-client.com"
+
+# Message Queue Configuration
+message_queue:
+  enabled: true
+  queue_type: "RabbitMQ"  # Options: "RabbitMQ", "Kafka", "Redis"
+  host: "localhost"
+  port: 5672
+  username: "guest"
+  password: "guest"
+  queue_name: "iai_tasks"
+
+# Task Scheduling Configuration
+task_scheduler:
+  enabled: true
+  max_concurrent_tasks: 5  # Maximum number of concurrent tasks
+  task_timeout: 300  # Task timeout in seconds
+  retry_interval: 60  # Interval to retry failed tasks (in seconds)
+
+# Additional Features (For future expansion)
+future_features:
+  enable_federated_learning: false
+  enable_anomaly_detection: false
+  enable_real_time_updates: false
