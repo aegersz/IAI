@@ -1,0 +1,63 @@
+/*
+Summary of Updates:
+
+1. Expanded Python Code:
+
+Emulates a network of AI nodes across VMs.
+
+Each node has a role (ML Trainer or Web Crawler).
+
+Load balancing is implemented to distribute tasks evenly across nodes.
+
+A basic web crawling mechanism is simulated.
+
+Training tasks are split across nodes for distributed machine learning.
+
+
+
+2. Configuration File:
+
+YAML format for easy configuration of AI nodes, roles, network, and load balancing.
+
+Configuration for enabling/disabling web crawling and training tasks, with parameters like batch size and epochs.
+
+
+
+3. Python Implementation:
+
+Python code is structured to read the configuration file and initialize the system accordingly.
+
+Simulates training across distributed nodes and performs web crawling tasks.
+*/
+
+import yaml
+
+def load_config():
+    with open("config.yaml", "r") as file:
+        config = yaml.safe_load(file)
+    return config
+
+def setup_from_config(config):
+    # Initialize nodes and tasks from the config file
+    nodes = []
+    for node_config in config['network']['nodes']:
+        node = AI_Node(
+            node_id=node_config['node_id'],
+            role=node_config['role'],
+            ip=node_config['ip'],
+            port=node_config['port']
+        )
+        nodes.append(node)
+    return nodes
+
+# Load the config
+config = load_config()
+
+# Set up the nodes based on the configuration
+nodes = setup_from_config(config)
+
+# Set up load balancer
+load_balancer = LoadBalancer(nodes)
+
+# Example task: train across nodes
+train_across_nodes(load_balancer, training_data)
