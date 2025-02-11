@@ -1,0 +1,37 @@
+# Configuration for IAI System
+
+network:
+  nodes:
+    - node_id: 1
+      role: "ML Trainer"
+      ip: "192.168.0.1"
+      port: 8080
+    - node_id: 2
+      role: "ML Trainer"
+      ip: "192.168.0.2"
+      port: 8081
+    - node_id: 3
+      role: "Web Crawler"
+      ip: "192.168.0.3"
+      port: 8082
+    - node_id: 4
+      role: "Web Crawler"
+      ip: "192.168.0.4"
+      port: 8083
+    - node_id: 5
+      role: "ML Trainer"
+      ip: "192.168.0.5"
+      port: 8084
+
+load_balancing:
+  method: "least_load"
+  max_nodes: 5
+
+web_crawling:
+  enabled: true
+  crawl_interval: 10  # Seconds between crawl tasks
+
+training:
+  enabled: true
+  batch_size: 10
+  epochs: 50
